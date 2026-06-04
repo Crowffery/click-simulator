@@ -266,6 +266,8 @@ const el = {
   floatLayer: document.getElementById("floatLayer"),
   widgetLayer: document.getElementById("widgetLayer"),
   customCursor: document.getElementById("customCursor"),
+  landscapePrompt: document.getElementById("landscapePrompt"),
+  landscapeBtn: document.getElementById("landscapeBtn"),
   news: document.getElementById("news"),
   newsText: document.getElementById("newsText"),
   rain: document.getElementById("rain"),
@@ -368,16 +370,21 @@ function bindEvents() {
     if (event.target === el.modal) closeModal();
   });
   el.playAgain.addEventListener("click", resetGame);
+  el.landscapeBtn.addEventListener("click", requestMobileLandscapeLock);
   document.addEventListener("pointerdown", requestMobileLandscapeLock, { capture: true, once: true });
+  window.addEventListener("resize", updateLandscapePrompt);
+  screen.orientation?.addEventListener?.("change", updateLandscapePrompt);
   document.addEventListener("keydown", (event) => {
     if (event.key.toLowerCase() === "f") toggleFullscreen();
     if (event.key === "Escape") closeModal();
   });
   document.addEventListener("mousemove", moveCustomCursor);
+  updateLandscapePrompt();
 }
 
 async function requestMobileLandscapeLock() {
-  if (orientationLockAttempted || !isLikelyPhone()) return;
+  if (!isLikelyPhone()) return;
+  if (orientationLockAttempted && window.innerWidth > window.innerHeight) return;
   orientationLockAttempted = true;
   try {
     if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
@@ -388,12 +395,19 @@ async function requestMobileLandscapeLock() {
     // Some mobile browsers do not allow programmatic orientation locking.
     // The compact mobile layout remains usable without forcing CSS rotation.
   }
+  updateLandscapePrompt();
 }
 
 function isLikelyPhone() {
   const coarsePointer = window.matchMedia?.("(pointer: coarse)")?.matches;
   const narrowScreen = Math.min(window.innerWidth, window.innerHeight) <= 820;
   return !!coarsePointer && narrowScreen;
+}
+
+function updateLandscapePrompt() {
+  if (!el.landscapePrompt) return;
+  const showPrompt = isLikelyPhone() && window.innerHeight > window.innerWidth && !state.ended;
+  el.landscapePrompt.classList.toggle("hidden", !showPrompt);
 }
 
 function moveCustomCursor(event) {
@@ -526,6 +540,7 @@ function render() {
   el.clickButton.classList.toggle("fedora-button", state.cosmetics.includes("fedora"));
   document.body.classList.toggle("custom-cursor", state.cosmetics.includes("cursor"));
   el.customCursor.classList.toggle("hidden", !state.cosmetics.includes("cursor") || state.ended);
+  updateLandscapePrompt();
   renderUpgrades();
   updateWidgetClasses();
 }

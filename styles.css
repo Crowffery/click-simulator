@@ -344,6 +344,10 @@ button {
   }
 }
 
+.landscape-prompt {
+  display: none;
+}
+
 .dvd {
   position: absolute;
   display: grid;
@@ -2135,5 +2139,62 @@ button {
 
   .credit-roll {
     width: min(320px, calc(100vw - 28px));
+  }
+}
+
+@media (orientation: portrait) and (max-width: 820px) and (pointer: coarse) {
+  .landscape-prompt {
+    position: fixed;
+    z-index: 220;
+    left: 50%;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    display: grid;
+    width: min(270px, calc(100vw - 28px));
+    padding: 12px;
+    place-items: center;
+    gap: 6px;
+    border: 2px solid var(--line);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 4px 4px 0 var(--line);
+    text-align: center;
+    transform: translateX(-50%);
+  }
+
+  .landscape-prompt strong {
+    font-size: 16px;
+  }
+
+  .landscape-prompt span {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .landscape-prompt button {
+    padding: 6px 12px;
+    border: 2px solid var(--line);
+    background: #fff;
+    box-shadow: 2px 2px 0 var(--line);
+    cursor: pointer;
+    font-weight: 900;
+  }
+
+  .phone-icon {
+    width: 34px;
+    height: 52px;
+    border: 3px solid var(--line);
+    border-radius: 7px;
+    background: linear-gradient(#fff, #edf7ff);
+    transform: rotate(90deg);
+  }
+
+  .phone-icon::after {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    margin: 40px auto 0;
+    border-radius: 50%;
+    background: var(--line);
   }
 }
