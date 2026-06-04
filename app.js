@@ -288,6 +288,13 @@ bindEvents();
 rebuildAll();
 requestAnimationFrame(loop);
 
+function gameSize() {
+  return {
+    w: el.app.clientWidth || window.innerWidth,
+    h: el.app.clientHeight || window.innerHeight,
+  };
+}
+
 function freshState() {
   return {
     stim: 0,
@@ -434,7 +441,7 @@ function buyUpgrade(id) {
 function buyDvd() {
   state.dvdCount += 1;
   state.spb += state.dvdCount === 1 ? 0 : 1;
-  const rect = { w: window.innerWidth, h: window.innerHeight };
+  const rect = gameSize();
   const dvd = {
     x: Math.random() * Math.max(100, rect.w - 130),
     y: Math.random() * Math.max(100, rect.h - 90),
@@ -685,12 +692,13 @@ function spawnClickPop(x, y, amount, crit) {
 
 function spawnLoot() {
   if (!state.flags.loot || el.floatLayer.querySelector(".lootbox")) return;
+  const rect = gameSize();
   const node = document.createElement("button");
   node.className = "lootbox";
   node.type = "button";
   node.innerHTML = `${assetImg("gift", "asset-loot", "loot")}<span>?</span>`;
-  node.style.left = `${80 + Math.random() * Math.max(120, window.innerWidth - 210)}px`;
-  node.style.top = `${80 + Math.random() * Math.max(120, window.innerHeight - 240)}px`;
+  node.style.left = `${80 + Math.random() * Math.max(120, rect.w - 210)}px`;
+  node.style.top = `${80 + Math.random() * Math.max(120, rect.h - 240)}px`;
   node.addEventListener("click", () => {
     const reward = 2500 + Math.random() * Math.max(1000, state.sps * 10);
     state.lootOpened += 1;
@@ -706,6 +714,7 @@ function spawnLoot() {
 
 function spawnPowerup() {
   if (!state.flags.powerups || el.floatLayer.querySelector(".powerup")) return;
+  const rect = gameSize();
   const types = [
     { id: "serene", label: "OCEAN", className: "powerup-serene" },
     { id: "critical", label: "CRIT", className: "powerup-critical" },
@@ -718,12 +727,12 @@ function spawnPowerup() {
   node.className = `powerup ${type.className}`;
   node.type = "button";
   node.innerHTML = `${assetImg(type.id === "gem" ? "gem" : type.id === "dvd" ? "dvd" : type.id === "serene" ? "bubbles" : "voltage", "asset-powerup", type.label)}<span>${type.label}</span>`;
-  node.style.left = `${90 + Math.random() * Math.max(120, window.innerWidth - 210)}px`;
-  node.style.top = `${90 + Math.random() * Math.max(120, window.innerHeight - 240)}px`;
+  node.style.left = `${90 + Math.random() * Math.max(120, rect.w - 210)}px`;
+  node.style.top = `${90 + Math.random() * Math.max(120, rect.h - 240)}px`;
   const lootbox = el.floatLayer.querySelector(".lootbox");
   if (lootbox) {
     const lootTop = parseFloat(lootbox.style.top) || 90;
-    const shiftedTop = lootTop + 76 < window.innerHeight - 120 ? lootTop + 76 : Math.max(70, lootTop - 76);
+    const shiftedTop = lootTop + 76 < rect.h - 120 ? lootTop + 76 : Math.max(70, lootTop - 76);
     node.style.top = `${shiftedTop}px`;
   }
   node.addEventListener("click", () => {
@@ -761,12 +770,13 @@ function activatePowerup(type) {
 
 function spawnAd() {
   if (!state.flags.skywriter && !state.flags.ui) return;
+  const rect = gameSize();
   const node = document.createElement("button");
   node.className = "popup-ad";
   node.type = "button";
   node.innerHTML = `${assetImg("slot", "asset-ad", "ad")}<strong>CONGRATULATIONS</strong><span>You won more stimulation</span>`;
-  node.style.left = `${60 + Math.random() * Math.max(120, window.innerWidth - 300)}px`;
-  node.style.top = `${70 + Math.random() * Math.max(120, window.innerHeight - 270)}px`;
+  node.style.left = `${60 + Math.random() * Math.max(120, rect.w - 300)}px`;
+  node.style.top = `${70 + Math.random() * Math.max(120, rect.h - 270)}px`;
   node.addEventListener("click", () => {
     addStim(7777);
     node.remove();
@@ -779,6 +789,7 @@ function spawnAd() {
 function spawnNotification() {
   if (!state.flags.email && !state.flags.duo && !state.flags.gems) return;
   if (el.floatLayer.querySelector(".notification-bubble")) return;
+  const rect = gameSize();
   const labels = ["1", "!", "99+", "new", "reply"];
   const icons = ["bell", "warning", "envelope", "replyMail", "moneyBag"];
   const index = Math.floor(Math.random() * labels.length);
@@ -786,8 +797,8 @@ function spawnNotification() {
   node.className = "notification-bubble";
   node.type = "button";
   node.innerHTML = `${assetImg(icons[index], "asset-notification", labels[index])}<span>${labels[index]}</span>`;
-  node.style.left = `${70 + Math.random() * Math.max(120, window.innerWidth - 180)}px`;
-  node.style.top = `${60 + Math.random() * Math.max(120, window.innerHeight - 190)}px`;
+  node.style.left = `${70 + Math.random() * Math.max(120, rect.w - 180)}px`;
+  node.style.top = `${60 + Math.random() * Math.max(120, rect.h - 190)}px`;
   node.addEventListener("click", () => {
     addStim(900 + Math.random() * 1800);
     node.remove();
@@ -831,12 +842,13 @@ function cycleLofiTrack() {
 
 function spawnKinderEgg() {
   if (!state.flags.pet || el.floatLayer.querySelector(".kinder-egg")) return;
+  const rect = gameSize();
   const node = document.createElement("button");
   node.className = "kinder-egg";
   node.type = "button";
   node.innerHTML = `${assetImg("sparkles", "asset-kinder", "surprise")}<span>?</span>`;
-  node.style.left = `${60 + Math.random() * Math.max(120, window.innerWidth - 170)}px`;
-  node.style.top = `${window.innerHeight - 96}px`;
+  node.style.left = `${60 + Math.random() * Math.max(120, rect.w - 170)}px`;
+  node.style.top = `${rect.h - 96}px`;
   node.addEventListener("click", () => {
     state.kinderEggs += 1;
     addStim(3200 + state.kinderEggs * 700);
@@ -876,8 +888,9 @@ function moveDvds(dt) {
   if (!state.dvds.length) return;
   const speedBoost = state.powerModes.dvd > 0 ? 2 : 1;
   const nodes = el.dvdLayer.children;
-  const maxX = Math.max(30, window.innerWidth - 100);
-  const maxY = Math.max(30, window.innerHeight - 68);
+  const rect = gameSize();
+  const maxX = Math.max(30, rect.w - 100);
+  const maxY = Math.max(30, rect.h - 68);
   state.dvds.forEach((dvd, index) => {
     dvd.x += dvd.vx * dt * state.dvdSpeed * speedBoost;
     dvd.y += dvd.vy * dt * state.dvdSpeed * speedBoost;
@@ -1562,10 +1575,11 @@ function playTone(frequency, duration, type = "sine", gain = 0.025) {
 }
 
 function announce(text) {
+  const rect = gameSize();
   const node = document.createElement("div");
   node.className = "float-pop crit";
   node.textContent = text;
-  node.style.left = `${window.innerWidth / 2 - 90}px`;
+  node.style.left = `${rect.w / 2 - 90}px`;
   node.style.top = "120px";
   el.floatLayer.appendChild(node);
   if (state.flags.narrator) speak(text);

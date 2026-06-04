@@ -16,12 +16,16 @@
 html,
 body {
   width: 100%;
+  height: 100%;
   min-height: 100%;
   margin: 0;
   color: var(--ink);
   background: var(--paper);
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  touch-action: manipulation;
 }
 
 button {
@@ -1890,5 +1894,239 @@ button {
   .pet {
     transform: scale(0.78);
     transform-origin: bottom right;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape), (orientation: portrait) and (max-width: 820px) {
+  .click-zone {
+    z-index: 80;
+    isolation: isolate;
+    top: 46%;
+    gap: 8px;
+  }
+
+  .click-zone::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -14px 52px -12px;
+    border-radius: 12px;
+    background: rgba(251, 250, 246, 0.88);
+    box-shadow: 0 0 0 2px rgba(251, 250, 246, 0.8);
+    pointer-events: none;
+  }
+
+  .click-button {
+    z-index: 1;
+    min-width: 148px;
+    min-height: 44px;
+    padding: 9px 22px;
+    font-size: 14px;
+    box-shadow: 0 4px 0 var(--line);
+  }
+
+  .click-button.upgraded {
+    min-width: 184px;
+    min-height: 52px;
+    font-size: 16px;
+  }
+
+  .click-button.super {
+    min-width: 218px;
+    min-height: 60px;
+    font-size: 16px;
+  }
+
+  .click-button.pinwheel::before {
+    inset: -14px;
+  }
+
+  .fedora-hat {
+    top: -17px;
+    width: 48px;
+    height: 15px;
+  }
+
+  .stim-count {
+    z-index: 1;
+    min-height: 24px;
+    font-size: 18px;
+  }
+
+  .sps-count {
+    z-index: 1;
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .level-box {
+    z-index: 1;
+    width: 210px;
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .upgrade-panel {
+    right: max(10px, env(safe-area-inset-right));
+    bottom: max(10px, env(safe-area-inset-bottom));
+    width: 248px;
+  }
+
+  .panel-title {
+    margin-bottom: 5px;
+    font-size: 17px;
+  }
+
+  .upgrade-list {
+    gap: 5px;
+  }
+
+  .upgrade-card {
+    padding: 7px;
+    box-shadow: 2px 2px 0 var(--line);
+  }
+
+  .upgrade-name {
+    font-size: 13px;
+  }
+
+  .upgrade-desc,
+  .upgrade-cost {
+    font-size: 10px;
+  }
+
+  .toolbar {
+    left: max(8px, env(safe-area-inset-left));
+    bottom: max(8px, env(safe-area-inset-bottom));
+    max-width: calc(100vw - 280px);
+    gap: 5px;
+  }
+
+  .toolbar button,
+  .modal button,
+  .ocean button {
+    padding: 5px 7px;
+    font-size: 12px;
+    box-shadow: 1px 1px 0 var(--line);
+  }
+
+  .news {
+    height: 28px;
+  }
+
+  .news::before,
+  .news-text {
+    top: 0;
+    padding-top: 7px;
+    font-size: 12px;
+  }
+
+  .widget {
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.9);
+  }
+
+  .subway {
+    right: 268px;
+    bottom: 124px;
+  }
+
+  .lofi {
+    right: 472px;
+    bottom: 112px;
+  }
+
+  .slime,
+  .mukbang,
+  .podcast,
+  .meditation,
+  .fitness,
+  .streamer,
+  .stock,
+  .mail,
+  .chat,
+  .pet,
+  .gems,
+  .button-stack {
+    transform: scale(0.72);
+  }
+
+  .stock {
+    right: 270px;
+    top: 36px;
+  }
+
+  .mail {
+    top: 260px;
+    right: 285px;
+  }
+
+  .duo {
+    top: 42px;
+    right: 10px;
+    width: 196px;
+    padding: 9px;
+    transform: scale(0.82);
+    transform-origin: top right;
+  }
+
+  .modal-card {
+    width: min(460px, calc(100vw - 24px));
+    max-height: calc(100vh - 24px);
+    padding: 14px;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 820px) {
+  .app {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vh;
+    height: 100vw;
+    width: 100svh;
+    height: 100svw;
+    transform: translate(-50%, -50%) rotate(90deg);
+    transform-origin: center center;
+  }
+
+  .click-zone {
+    z-index: 80;
+    isolation: isolate;
+    width: min(420px, calc(100svh - 32px));
+  }
+
+  .click-zone::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -14px 52px -12px;
+    border-radius: 12px;
+    background: rgba(251, 250, 246, 0.88);
+    box-shadow: 0 0 0 2px rgba(251, 250, 246, 0.8);
+    pointer-events: none;
+  }
+
+  .click-button,
+  .stim-count,
+  .sps-count,
+  .level-box {
+    z-index: 1;
+  }
+
+  .upgrade-panel {
+    width: min(248px, calc(100svh - 44px));
+  }
+
+  .toolbar {
+    max-width: calc(100svh - 280px);
+  }
+
+  .modal-card {
+    width: min(460px, calc(100svh - 24px));
+    max-height: calc(100svw - 24px);
+  }
+
+  .credit-roll {
+    width: min(420px, calc(100svh - 28px));
   }
 }
