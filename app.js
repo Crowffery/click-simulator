@@ -251,6 +251,7 @@ let passiveSaveTimer = 0;
 let saveTimeout = 0;
 let soundReady = false;
 let audioContext = null;
+let orientationLockAttempted = false;
 
 const el = {
   app: document.getElementById("app"),
@@ -367,11 +368,32 @@ function bindEvents() {
     if (event.target === el.modal) closeModal();
   });
   el.playAgain.addEventListener("click", resetGame);
+  document.addEventListener("pointerdown", requestMobileLandscapeLock, { capture: true, once: true });
   document.addEventListener("keydown", (event) => {
     if (event.key.toLowerCase() === "f") toggleFullscreen();
     if (event.key === "Escape") closeModal();
   });
   document.addEventListener("mousemove", moveCustomCursor);
+}
+
+async function requestMobileLandscapeLock() {
+  if (orientationLockAttempted || !isLikelyPhone()) return;
+  orientationLockAttempted = true;
+  try {
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+      await document.documentElement.requestFullscreen();
+    }
+    await screen.orientation?.lock?.("landscape");
+  } catch {
+    // Some mobile browsers do not allow programmatic orientation locking.
+    // The compact mobile layout remains usable without forcing CSS rotation.
+  }
+}
+
+function isLikelyPhone() {
+  const coarsePointer = window.matchMedia?.("(pointer: coarse)")?.matches;
+  const narrowScreen = Math.min(window.innerWidth, window.innerHeight) <= 820;
+  return !!coarsePointer && narrowScreen;
 }
 
 function moveCustomCursor(event) {
