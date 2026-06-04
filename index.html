@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>stimulation</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <div id="rain" class="rain" aria-hidden="true"></div>
+      <div id="news" class="news hidden" aria-hidden="true">
+        <div id="newsText" class="news-text"></div>
+      </div>
+      <main class="click-zone" aria-label="Stimulation clicker">
+        <button id="clickButton" class="click-button" type="button"><span class="fedora-hat" aria-hidden="true"></span>Click me</button>
+        <div id="stimCount" class="stim-count">0 stimulation</div>
+        <div id="spsCount" class="sps-count hidden">0 stimulation/sec</div>
+        <div id="levelBox" class="level-box hidden">
+          <span id="levelText">Level 1</span>
+          <div class="xp-track"><div id="xpFill" class="xp-fill"></div></div>
+        </div>
+      </main>
+
+      <aside id="upgradePanel" class="upgrade-panel">
+        <div class="panel-title">Upgrades</div>
+        <div id="upgradeList" class="upgrade-list"></div>
+      </aside>
+
+      <div id="dvdLayer" class="dvd-layer" aria-hidden="true"></div>
+      <div id="floatLayer" class="float-layer" aria-hidden="true"></div>
+      <div id="widgetLayer" class="widget-layer" aria-live="polite"></div>
+      <div id="customCursor" class="custom-cursor-visual hidden" aria-hidden="true"></div>
+      <div id="toolbar" class="toolbar hidden">
+        <button id="achievementsBtn" type="button">Achievements</button>
+        <button id="screenTimeBtn" class="hidden" type="button">Screen Time</button>
+        <button id="shopBtn" class="hidden" type="button">Item Shop</button>
+        <button id="stockBtn" class="hidden" type="button">Stocks</button>
+        <button id="emailBtn" class="hidden" type="button">Inbox</button>
+        <button id="resetBtn" type="button">Reset</button>
+      </div>
+
+      <section id="modal" class="modal hidden" aria-modal="true" role="dialog">
+        <div class="modal-card">
+          <button id="modalClose" class="modal-close" type="button">x</button>
+          <h2 id="modalTitle"></h2>
+          <div id="modalBody"></div>
+        </div>
+      </section>
+
+      <section id="ocean" class="ocean hidden">
+        <div class="sun"></div>
+        <div class="ocean-copy">
+          <h1>You went to the ocean.</h1>
+          <p>The stimulation is over.</p>
+          <button id="playAgain" type="button">Play again</button>
+        </div>
+        <div class="wave wave-a"></div>
+        <div class="wave wave-b"></div>
+        <div class="credit-roll" aria-hidden="true">
+          <div>Stimulation Clicker</div>
+          <div>local recreation</div>
+          <div>clicks, upgrades, and calm</div>
+          <div>thank you for going outside</div>
+        </div>
+      </section>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
