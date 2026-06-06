@@ -114,6 +114,7 @@ button {
   flex-direction: column;
   align-items: center;
   gap: 14px;
+  pointer-events: none;
 }
 
 .click-button {
@@ -127,6 +128,7 @@ button {
   box-shadow: 0 5px 0 var(--line);
   cursor: pointer;
   user-select: none;
+  pointer-events: auto;
   transition: transform 80ms ease, box-shadow 80ms ease, border-radius 160ms ease;
 }
 
@@ -155,6 +157,24 @@ button {
   color: #fff;
   background: linear-gradient(135deg, #fd3d80, #563dff, #17d3a2);
   text-shadow: 0 1px 1px #000;
+}
+
+.click-button.glass-skin {
+  border-color: rgba(255, 255, 255, 0.72);
+  color: #102030;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(204, 232, 255, 0.42)),
+    rgba(255, 255, 255, 0.45);
+  box-shadow: 0 5px 0 rgba(25, 44, 70, 0.9), inset 0 1px 18px rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.click-button.arcade-skin {
+  border-radius: 999px;
+  color: #fff;
+  background: radial-gradient(circle at 38% 28%, #ffb8b8 0 12%, #f12d2d 36%, #8b0707 100%);
+  box-shadow: 0 7px 0 #320000, inset -8px -12px 0 rgba(0, 0, 0, 0.18);
+  text-shadow: 0 2px 0 #320000;
 }
 
 .click-button.pinwheel::before {
@@ -221,6 +241,7 @@ button {
   padding: 8px;
   border: 2px solid var(--line);
   background: #fff;
+  pointer-events: auto;
 }
 
 .xp-track {
@@ -580,6 +601,113 @@ button {
   animation: blink 650ms steps(2) infinite;
 }
 
+.voxel-video {
+  background: linear-gradient(#87c7ff 0 36%, #6bbf52 37%, #6b452e 100%);
+}
+
+.sitcom-video {
+  background:
+    linear-gradient(90deg, transparent 0 22%, rgba(255, 255, 255, 0.18) 23% 26%, transparent 27% 100%),
+    linear-gradient(#6d4edb 0 45%, #f5b3d0 46% 100%);
+}
+
+.sitcom-couch {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 18px;
+  height: 46px;
+  border: 3px solid #111;
+  border-radius: 22px 22px 8px 8px;
+  background: #f2a21b;
+}
+
+.sitcom-lamps {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  width: 32px;
+  height: 62px;
+  border-radius: 16px 16px 4px 4px;
+  background: #ffe86c;
+  box-shadow: 138px 8px 0 -4px #ffe86c;
+  animation: blink 1.2s steps(2) infinite;
+}
+
+.worldcup-video {
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.16) 0 22px, transparent 22px 44px),
+    linear-gradient(#36b25d, #157c3a);
+}
+
+.pitch {
+  position: absolute;
+  inset: 18px 24px;
+  border: 3px solid rgba(255, 255, 255, 0.86);
+  border-radius: 50%;
+}
+
+.ball {
+  position: absolute;
+  left: 28px;
+  bottom: 28px;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #111;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff 0 30%, #111 31% 40%, #fff 41%);
+  animation: goalRun 1.8s ease-in-out infinite;
+}
+
+@keyframes goalRun {
+  50% {
+    transform: translate(120px, -54px) rotate(280deg);
+  }
+}
+
+.voxel-wall {
+  position: absolute;
+  inset: 48px 12px 18px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  transform: perspective(260px) rotateX(10deg);
+}
+
+.voxel-wall i {
+  border: 2px solid rgba(0, 0, 0, 0.38);
+  background: linear-gradient(135deg, #6d7482, #3f4650);
+  animation: orePulse 1.4s steps(2) infinite;
+  animation-delay: calc(var(--i) * -80ms);
+}
+
+.voxel-wall i:nth-child(5n) {
+  background: linear-gradient(135deg, #46f0ff, #157a9c);
+}
+
+.pickaxe {
+  position: absolute;
+  z-index: 2;
+  right: 32px;
+  top: 38px;
+  font-size: 42px;
+  filter: drop-shadow(2px 2px 0 #111);
+  animation: mineSwing 780ms ease-in-out infinite;
+  transform-origin: 70% 80%;
+}
+
+@keyframes mineSwing {
+  50% {
+    transform: rotate(-38deg) translate(-18px, 12px);
+  }
+}
+
+@keyframes orePulse {
+  50% {
+    filter: brightness(1.35);
+  }
+}
+
 @keyframes run {
   50% {
     transform: translateX(92px) rotate(8deg);
@@ -670,6 +798,12 @@ button {
   background: radial-gradient(circle at 35% 40%, #ffd178, #e64a30 55%, #69330f);
 }
 
+.korean-asmr {
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 255, 255, 0.65) 0 12%, transparent 13%),
+    linear-gradient(135deg, #ffd1e5, #ff7a7a 48%, #6f1d1d);
+}
+
 .podcast {
   left: 30px;
   bottom: 70px;
@@ -705,6 +839,15 @@ button {
   margin: 4px auto;
 }
 
+.podcast-play {
+  padding: 5px 8px;
+  border: 2px solid #111;
+  background: #fff;
+  box-shadow: 2px 2px 0 #111;
+  cursor: pointer;
+  font-weight: 900;
+}
+
 @keyframes pulse {
   to {
     transform: scaleY(0.55);
@@ -713,38 +856,50 @@ button {
 
 .hydraulic {
   top: 70px;
-  left: calc(50% - 52px);
-  width: 104px;
-  height: 212px;
-  border: 0;
-  box-shadow: none;
-  background: transparent;
-  pointer-events: none;
+  left: calc(50% - 128px);
+  z-index: 46;
+  width: 168px;
+  height: 238px;
+  border: 2px solid #111;
+  box-shadow: 4px 4px 0 #111;
+  background: #141414;
+  pointer-events: auto;
 }
 
-.hydraulic .squish {
+.hydraulic-play {
   position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: 24px;
+  z-index: 4;
+  left: 10px;
+  right: 10px;
+  top: 8px;
   padding: 5px;
   border: 2px solid #111;
-  background: #fff;
+  background: #ffe86c;
   box-shadow: 2px 2px 0 #111;
   cursor: pointer;
+  font-size: 11px;
   font-weight: 900;
-  pointer-events: auto;
 }
 
 .hydraulic small {
   position: absolute;
-  left: -18px;
-  right: -18px;
-  bottom: 0;
-  color: #111;
+  left: 0;
+  right: 0;
+  bottom: 5px;
+  color: #fff;
   font-size: 11px;
   font-weight: 900;
   text-align: center;
+}
+
+.hydraulic-video {
+  position: absolute;
+  inset: 42px 10px 24px;
+  overflow: hidden;
+  border: 2px solid #333;
+  background:
+    linear-gradient(90deg, transparent 0 48%, #444 49% 52%, transparent 53%),
+    linear-gradient(#2f2f2f, #0d0d0d);
 }
 
 .meditation {
@@ -776,6 +931,51 @@ button {
   animation: counterSpin 3.2s linear infinite;
 }
 
+.activity-rings {
+  position: relative;
+  display: grid;
+  width: 104px;
+  height: 104px;
+  margin: 8px auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #050505;
+  box-shadow: inset 0 0 0 2px #111, 0 2px 0 #111;
+}
+
+.activity-rings span {
+  position: absolute;
+  inset: var(--inset);
+  border-radius: 50%;
+  background: conic-gradient(var(--color) 0 var(--progress), rgba(255, 255, 255, 0.12) var(--progress) 100%);
+  filter: drop-shadow(0 0 6px var(--color));
+  -webkit-mask: radial-gradient(circle, transparent calc(50% - 7px), #000 calc(50% - 6px), #000 calc(50% + 6px), transparent calc(50% + 7px));
+  mask: radial-gradient(circle, transparent calc(50% - 7px), #000 calc(50% - 6px), #000 calc(50% + 6px), transparent calc(50% + 7px));
+}
+
+.ring-move {
+  --inset: 10px;
+  --color: #ff2d7a;
+  --progress: 82%;
+}
+
+.ring-exercise {
+  --inset: 24px;
+  --color: #b7ff00;
+  --progress: 64%;
+}
+
+.ring-stand {
+  --inset: 38px;
+  --color: #00e5ff;
+  --progress: 48%;
+}
+
+.activity-rings b {
+  color: #fff;
+  font-size: 14px;
+}
+
 @keyframes counterSpin {
   to {
     transform: rotate(-1turn);
@@ -792,7 +992,7 @@ button {
 
 .press-head {
   position: absolute;
-  top: 0;
+  top: 4px;
   left: 12px;
   right: 12px;
   display: grid;
@@ -827,7 +1027,7 @@ button {
 
 .press-rod {
   position: absolute;
-  top: -70px;
+  top: -76px;
   left: 46px;
   width: 12px;
   height: 120px;
@@ -836,7 +1036,7 @@ button {
 
 .press-base {
   position: absolute;
-  bottom: 52px;
+  bottom: 44px;
   left: 0;
   right: 0;
   height: 18px;
@@ -850,7 +1050,7 @@ button {
 }
 
 .hydraulic.squishing .press-head {
-  animation: squishPress 420ms ease-in-out;
+  animation: squishPress 1800ms ease-in-out;
 }
 
 .hydraulic.squishing .press-target {
@@ -869,12 +1069,27 @@ button {
   z-index: 3;
   pointer-events: none;
   opacity: 0;
-  background-image: repeating-linear-gradient(110deg, transparent 0 14px, rgba(60, 120, 180, 0.28) 14px 16px);
-  background-size: 80px 80px;
-  animation: rainFall 280ms linear infinite;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(70, 116, 150, 0.22), transparent 50%),
+    linear-gradient(rgba(17, 35, 48, 0.08), rgba(17, 35, 48, 0.18));
 }
 
 .rain.active {
+  opacity: 1;
+}
+
+.rain-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rain-ambient .rain-canvas {
   opacity: 1;
 }
 
@@ -908,9 +1123,12 @@ button {
 .duo {
   top: 70px;
   right: 26px;
-  width: 220px;
+  width: 315px;
   padding: 12px;
-  background: #bafc6a;
+  border-color: #e5e5e5;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 5px 0 #ddd;
 }
 
 .duo-timer {
@@ -956,21 +1174,68 @@ button {
 
 .duo-options {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
 .duo-answer {
-  padding: 5px;
-  font-size: 12px;
-  font-weight: 800;
+  padding: 10px;
+  border-color: #dedede;
+  border-radius: 9px;
+  box-shadow: 0 3px 0 #dedede;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.duo-top {
+  display: grid;
+  grid-template-columns: 62px 1fr 44px;
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 12px;
+}
+
+.duo-mascot {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border-radius: 16px;
+  background: linear-gradient(#73e52e, #46bb24);
+}
+
+.duo-mascot img {
+  width: 46px;
+  height: 46px;
+  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.14));
+}
+
+.duo-prompt {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.22;
+}
+
+.duo-ring {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #fff 0 61%, transparent 62%),
+    conic-gradient(#d2b000 0 var(--duo), #eee var(--duo) 100%);
+  font-size: 18px;
 }
 
 .stock {
   top: 8px;
   right: 300px;
-  width: 286px;
+  z-index: 35;
+  width: 320px;
   padding: 10px;
+  background: #080808;
+  color: #f7f7f7;
 }
 
 .ticker {
@@ -992,6 +1257,101 @@ button {
 .ticker small {
   font-size: 10px;
   font-weight: 700;
+}
+
+.stock-terminal {
+  overflow: hidden;
+  border: 1px solid #333;
+  background: #0b0b0b;
+}
+
+.stock-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-bottom: 1px solid #333;
+  font-size: 20px;
+}
+
+.stock-head strong {
+  color: #7cff31;
+}
+
+.stock-chart {
+  display: block;
+  width: 100%;
+  height: 138px;
+  background: linear-gradient(90deg, #191919, #050505);
+}
+
+.stock-chart line {
+  stroke: #454545;
+  stroke-width: 1;
+}
+
+.stock-line {
+  fill: none;
+  stroke: #7cff31;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.stock-fill {
+  fill: url("#stockFill");
+}
+
+.stock-dot {
+  fill: #7cff31;
+}
+
+.stock-actions {
+  display: grid;
+  grid-template-columns: 1fr 96px 96px;
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+}
+
+.stock-actions span {
+  font-size: 18px;
+}
+
+.stock-actions em {
+  color: #7cff31;
+  font-style: normal;
+}
+
+.stock-actions button {
+  padding: 10px 8px;
+  border: 0;
+  border-radius: 999px;
+  color: #000;
+  background: linear-gradient(#b9ff5b, #75f524);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.stock-actions button[data-action="sell"] {
+  color: #0b0507;
+  background: linear-gradient(#aa5a76, #8f3858);
+}
+
+.ticker-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.mini-ticker {
+  padding: 5px;
+  border: 1px solid #333;
+  color: #e8e8e8;
+  background: #171717;
+  cursor: pointer;
+  font-size: 11px;
 }
 
 .mail {
@@ -2063,8 +2423,10 @@ button {
   }
 
   .stock {
-    right: 270px;
+    left: 10px;
+    right: auto;
     top: 36px;
+    transform-origin: top left;
   }
 
   .mail {

@@ -1,46 +1,31 @@
 const SAVE_KEY = "local-stimulation-clicker";
 
 const NEWS = [
-  "Scientists discover house parties",
-  "Are news banners a thing of the past?",
-  "Frogs missing worldwide",
-  "Wall Street analyst says recession will happen, or maybe not, he's not really sure",
-  "The frogs are back",
-  "Are cold showers making you bald?",
-  "My tummy hurts :(",
-  "Lab rats unionize and demand fair compensation",
-  "Op-ed: I've always wanted to write an op-ed",
-  "Local man finally moving away",
-  "Study says that you're looking super cute today :3",
-  "Introverts United meetup deals with disappointing attendance",
-  "Peter Piper, 63, picked up in pickled pepper ponzi plot",
-  "News headline writers facing layoffs, wait does that include me? Please I need this",
-  "President moves to reverse The Louisiana Purchase, It was just a bad deal",
-  "Diet Coke shown to cure just about everything",
-  "World's longest game of hide and seek turns into missing persons case",
-  "Mystery Meat Monday causes mass casualty",
-  "Hacker sets everyone's credit score to 7",
-  "Hero dog becomes world's worst DJ",
-  "Shrieking eldritch horror pulls ahead in mayoral race",
-  "Child star steals hearts, faces prison",
-  "Celebrity chef apologizes for asbestos incident",
-  "Father, 34, arrested for stealing son's nose",
-  "Scientists reveal something huge, probably",
-  "Rain expected worldwide today",
-  "Officials warn batteries still not edible",
-  "Winter fashion forecast: Jorts and junderwear",
-  "Orca capsizes hearts, wins Mystic Bay beauty pageant",
-  "Local grandma says you're too thin",
-  "Ketchup truck collision has drivers seeing red",
-  "Gymnastic medalist arrested in murder plot: She's twisted",
-  "Hot dog eating competition ends in tragedy",
-  "Scientists invent new form of anxiety",
-  "Local election ends in tie, candidates must kiss",
-  "Five dead in trolley problem",
-  "MPA unveils new rating system for prudes, dorks",
-  "Double trouble: Another Earth is heading our way",
-  "Beloved talk show host's last words revealed: oof",
-  "Nine out of ten doctors agree: The other doctor is a menace",
+  "BREAKING: Button economy expands after citizen presses rectangle again",
+  "Experts warn harmless distractions may be distracting on purpose",
+  "Nation divided over whether one more upgrade will fix everything",
+  "Study finds people prefer calm rain when surrounded by financial panic",
+  "Tiny owl denies being responsible for language anxiety",
+  "Airplane banner industry pivots to selling intrusive thoughts",
+  "Sleep scientists endorse rain, condemn surprise notification bubbles",
+  "Local clicker says they can stop whenever next upgrade appears",
+  "Markets rally after fictional traders discover buy button",
+  "Hydraulic press asks public to respect its work-life balance",
+  "Digital wellness app reports user spent 14 minutes optimizing wellness app",
+  "Meditation ring closes, immediately reopens another craving",
+  "Korean ASMR broadcast blamed for nationwide snack purchases",
+  "Voxel miner finds rare ore, loses all sense of time",
+  "True crime narrator whispers: the real victim was attention span",
+  "Friends rerun considered as emergency background stimulus",
+  "World Cup replay used as legal substitute for productivity",
+  "Ad buyers celebrate first banner to be noticed by accident",
+  "Thunder upgrade promises premium atmospheric dread",
+  "Phone politely asks user to rotate before developing neck problem",
+  "Financial chart becomes cooler after turning black and neon green",
+  "Gamers demand more sleep-friendly storms with fewer existential tabs",
+  "Grandma still concerned about the button",
+  "Researchers discover dopamine behind couch cushions",
+  "Public asks whether breaking news can please stop breaking",
 ];
 
 const CHAT = [
@@ -111,20 +96,30 @@ const BASE_STOCKS = [
 let STOCKS = freshStocks();
 
 function freshStocks() {
-  return BASE_STOCKS.map((stock) => ({ ...stock }));
+  return BASE_STOCKS.map((stock) => ({ ...stock, history: seedStockHistory(stock.price) }));
+}
+
+function seedStockHistory(price) {
+  const history = [];
+  let current = price;
+  for (let i = 0; i < 18; i += 1) {
+    current = Math.max(1, current + (Math.random() - 0.42) * 8);
+    history.push(Number(current.toFixed(2)));
+  }
+  return history;
 }
 
 const DUO_QUESTIONS = [
-  { prompt: "Translate: stimulation", answer: "estimulo", options: ["estimulo", "zapato", "queso"] },
-  { prompt: "Translate: click", answer: "clic", options: ["clic", "nube", "mesa"] },
-  { prompt: "Translate: rain", answer: "lluvia", options: ["lluvia", "pan", "raton"] },
-  { prompt: "Translate: ocean", answer: "oceano", options: ["oceano", "boton", "verde"] },
-  { prompt: "Translate: button", answer: "boton", options: ["gato", "boton", "luna"] },
-  { prompt: "Translate: news", answer: "noticias", options: ["noticias", "silla", "flor"] },
-  { prompt: "Translate: owl", answer: "buho", options: ["cafe", "buho", "tren"] },
-  { prompt: "Translate: gem", answer: "gema", options: ["mesa", "gema", "zapato"] },
-  { prompt: "Translate: music", answer: "musica", options: ["musica", "llave", "sol"] },
-  { prompt: "Translate: chicken", answer: "pollo", options: ["nube", "pollo", "libro"] },
+  { prompt: "How do you say goodbye in Welsh?", answer: "Hwyl fawr", options: ["Hwyl fawr", "Farthee gow", "Hrtha tee", "Gwyn morn"] },
+  { prompt: "How do you say click in Spanish?", answer: "clic", options: ["clic", "nube", "mesa", "queso"] },
+  { prompt: "How do you say rain in Spanish?", answer: "lluvia", options: ["lluvia", "pan", "raton", "sol"] },
+  { prompt: "How do you say ocean in Spanish?", answer: "oceano", options: ["oceano", "boton", "verde", "tren"] },
+  { prompt: "How do you say button in Spanish?", answer: "boton", options: ["gato", "boton", "luna", "flor"] },
+  { prompt: "How do you say news in Spanish?", answer: "noticias", options: ["noticias", "silla", "cafe", "llave"] },
+  { prompt: "How do you say owl in Spanish?", answer: "buho", options: ["cafe", "buho", "tren", "mesa"] },
+  { prompt: "How do you say gem in Spanish?", answer: "gema", options: ["mesa", "gema", "zapato", "libro"] },
+  { prompt: "How do you say music in Spanish?", answer: "musica", options: ["musica", "llave", "sol", "nube"] },
+  { prompt: "How do you say chicken in Spanish?", answer: "pollo", options: ["nube", "pollo", "libro", "pan"] },
 ];
 
 const EMAILS = [
@@ -180,6 +175,11 @@ const COSMETICS = [
   { id: "cursor", name: "Custom cursor", cost: 3, icon: "gear" },
   { id: "fedora", name: "Fedora", cost: 5, icon: "topHat" },
   { id: "slinky", name: "Slinky trail", cost: 7, icon: "gift" },
+  { id: "alarm", name: "Alarm off switch", cost: 4, icon: "bell" },
+  { id: "glassButton", name: "Glass sleep button", cost: 6, icon: "sparkles" },
+  { id: "arcadeButton", name: "Arcade red button", cost: 8, icon: "gamepad" },
+  { id: "friendsTape", name: "Friends-style sitcom tape", cost: 9, icon: "television" },
+  { id: "worldCupTape", name: "World cup replay tape", cost: 10, icon: "gamepad" },
 ];
 
 const UPGRADE_DEFS = [
@@ -189,7 +189,7 @@ const UPGRADE_DEFS = [
   { id: "sps", name: "SPS Counter", cost: 25, desc: "See your stimulation per second.", action: () => { state.flags.sps = true; } },
   { id: "button1", name: "Button Upgrade", cost: 50, desc: "Button is a little bigger, rounder, and making sound.", action: () => { state.perClick += 1; state.flags.button1 = true; } },
   { id: "dvdSound", name: "DVD Bounce Sound", cost: 75, req: () => state.dvdCount > 0, desc: "DVDs now make sound when bouncing the wall.", action: () => { state.spb += 5; state.flags.dvdSound = true; } },
-  { id: "subway", name: "Subway Surfers", cost: 100, desc: "Adds Subway Surfers into the bottom right corner.", action: () => { state.sps += 3; addWidget("subway"); } },
+  { id: "subway", name: "Mining Replay", cost: 100, desc: "Adds a voxel mining recording in the corner.", action: () => { state.sps += 3; addWidget("subway"); } },
   { id: "news", name: "Breaking News", cost: 100, desc: "Stay up to date with the latest news.", action: () => { state.sps += 4; state.flags.news = true; } },
   { id: "critical", name: "Critical Hits", cost: 200, req: "amount", desc: "Adds critical hits when clicking the button.", action: () => { state.flags.critical = true; } },
   { id: "lofi", name: "Lofi Beats", cost: 250, desc: "Helps you study and relax.", action: () => { state.sps += 10; addWidget("lofi"); } },
@@ -216,7 +216,7 @@ const UPGRADE_DEFS = [
   { id: "duo", name: "Duolingo", cost: 25000, desc: "Learn a new language, or else...", action: () => { state.flags.duo = true; unlockAchievement("Hoot Hoot"); addWidget("duo"); } },
   { id: "meditation", name: "Meditation", cost: 35000, desc: "Help relax your mind.", action: () => { state.sps += 120; state.flags.meditation = true; addWidget("meditation"); } },
   { id: "dvdSpeed1", name: "DVD Speed I", cost: 50000, desc: "Double DVD speed.", action: () => { state.dvdSpeed *= 2; } },
-  { id: "subwaySound", name: "Subway Surfers Unmuted", cost: 50000, req: "subway", desc: "Unmute Subway Surfers.", action: () => { state.sps += 150; state.flags.subwaySound = true; } },
+  { id: "subwaySound", name: "Mining Replay Audio", cost: 50000, req: "subway", desc: "Unmute pickaxe hits and cave taps.", action: () => { state.sps += 150; state.flags.subwaySound = true; } },
   { id: "email", name: "Email", cost: 60000, desc: "Take a break and check your inbox.", action: () => { state.flags.email = true; addWidget("mail"); } },
   { id: "meditation2", name: "Meditation 2x", cost: 60000, req: "meditation", desc: "Meditate twice as fast.", action: () => { state.sps += 120; state.flags.meditation2 = true; } },
   { id: "fitness", name: "Fitness Instructor", cost: 75000, desc: "Stay fit with your screen.", action: () => { state.sps += 100; addWidget("fitness"); } },
@@ -226,12 +226,12 @@ const UPGRADE_DEFS = [
   { id: "powerups", name: "Powerups", cost: 150000, desc: "Powerup.", action: () => { state.flags.powerups = true; } },
   { id: "skywriter", name: "Skywriter", cost: 180000, desc: "Add banner ads.", action: () => { state.sps += 700; state.flags.skywriter = true; addWidget("skywriter"); } },
   { id: "narrator", name: "Voice Narrator", cost: 200000, desc: "Add a voice narrator to your experience.", action: () => { state.flags.narrator = true; announce("Great stimulation."); } },
-  { id: "subwayFull", name: "Subway Surfers Fullscreen", cost: 250000, req: "subway", desc: "It's time to get serious.", action: () => { state.sps += 500; state.flags.subwayFull = true; unlockAchievement("Tube Rider"); } },
+  { id: "subwayFull", name: "Mining Replay Fullscreen", cost: 250000, req: "subway", desc: "The mining tape takes over the screen.", action: () => { state.sps += 500; state.flags.subwayFull = true; unlockAchievement("Tube Rider"); } },
   { id: "leverage", name: "Leverage", cost: 250000, req: "stocks", desc: "Double stock gains and losses.", action: () => { state.flags.leverage = true; } },
   { id: "pet", name: "Tamagotchi", cost: 300000, desc: "Adopt a virtual pet. Don't forget to feed him.", action: () => { state.flags.pet = true; addWidget("pet"); } },
   { id: "chat", name: "Twitch Chat", cost: 500000, desc: "Start streaming.", action: () => { state.flags.chat = true; addWidget("chat"); } },
   { id: "dvdSpeed2", name: "DVD Speed II", cost: 750000, desc: "Double DVD speed.", action: () => { state.dvdSpeed *= 2; } },
-  { id: "wormhole", name: "Subway Surfers Wormhole", cost: 1000000, req: "subwayFull", desc: "Subway Surfers is now...", action: () => { state.sps += 1000; state.flags.wormhole = true; } },
+  { id: "wormhole", name: "Deep Mine Wormhole", cost: 1000000, req: "subwayFull", desc: "The replay breaks into the bedrock layer.", action: () => { state.sps += 1000; state.flags.wormhole = true; } },
   { id: "ocean", name: "Go to the Ocean", cost: 2000000, desc: "Last upgrade...", action: endGame },
 ];
 
@@ -252,6 +252,9 @@ let saveTimeout = 0;
 let soundReady = false;
 let audioContext = null;
 let orientationLockAttempted = false;
+let rainAudio = null;
+let rainDrops = [];
+let rainCanvasReady = false;
 
 const el = {
   app: document.getElementById("app"),
@@ -271,6 +274,7 @@ const el = {
   news: document.getElementById("news"),
   newsText: document.getElementById("newsText"),
   rain: document.getElementById("rain"),
+  rainCanvas: document.getElementById("rainCanvas"),
   toolbar: document.getElementById("toolbar"),
   achievementsBtn: document.getElementById("achievementsBtn"),
   screenTimeBtn: document.getElementById("screenTimeBtn"),
@@ -331,6 +335,8 @@ function freshState() {
     streamerHype: 0,
     chatDonations: 0,
     chatDonationGain: 0,
+    buttonSkin: "",
+    videoTheme: "voxel",
     lofiTrack: 0,
     kinderEggs: 0,
     subwayTime: 0,
@@ -529,6 +535,7 @@ function render() {
   el.app.classList.toggle("thunder", !!state.flags.thunder);
   el.app.classList.toggle("ui-upgrade", !!state.flags.ui);
   el.app.classList.toggle("serene-mode", state.powerModes.serene > 0 && !state.ended);
+  el.app.classList.toggle("rain-ambient", !!state.flags.rain);
   el.toolbar.classList.toggle("hidden", !state.flags.achievements && state.bought.length < 8);
   el.screenTimeBtn.classList.toggle("hidden", !state.flags.screen);
   el.shopBtn.classList.toggle("hidden", !state.flags.shop);
@@ -538,6 +545,8 @@ function render() {
   el.clickButton.classList.toggle("super", !!state.flags.button2 || !!state.flags.ui);
   el.clickButton.classList.toggle("pinwheel", !!state.flags.pinwheel);
   el.clickButton.classList.toggle("fedora-button", state.cosmetics.includes("fedora"));
+  el.clickButton.classList.toggle("glass-skin", state.buttonSkin === "glass");
+  el.clickButton.classList.toggle("arcade-skin", state.buttonSkin === "arcade");
   document.body.classList.toggle("custom-cursor", state.cosmetics.includes("cursor"));
   el.customCursor.classList.toggle("hidden", !state.cosmetics.includes("cursor") || state.ended);
   updateLandscapePrompt();
@@ -582,8 +591,8 @@ function rebuildWidgets() {
     const node = document.createElement("div");
     node.dataset.type = type;
     if (type === "subway") {
-      node.className = "widget video-card subway";
-      node.innerHTML = `<div class="subway-road"></div>${assetImg("metro", "asset-metro", "subway")}${assetImg("runner", "asset-runner", "runner")}<span>SUBWAY<br />SURFERS</span><em class="volume-badge">${state.flags.subwaySound ? "VOL" : "MUTE"}</em>`;
+      node.className = `widget video-card subway ${videoThemeClass()}`;
+      node.innerHTML = videoReplayHtml();
     } else if (type === "lofi") {
       node.className = "widget lofi";
       node.innerHTML = `<h3>Lofi Beats</h3><div class="lofi-girl">${assetImg("music", "asset-music", "music")}</div><button type="button">${LOFI_TRACKS[state.lofiTrack % LOFI_TRACKS.length]}</button>`;
@@ -593,17 +602,22 @@ function rebuildWidgets() {
         render();
       });
     } else if (type === "slime") {
-      node.className = "widget video-card slime";
-      node.innerHTML = `<div class="asset-pair">${assetImg("soap", "asset-small", "soap")}${assetImg("bubbles", "asset-small", "bubbles")}</div><span>SLIME<br />ASMR</span>`;
+      node.className = "widget video-card mukbang korean-asmr";
+      node.innerHTML = `<div class="asset-pair">${assetImg("bowl", "asset-small", "bowl")}${assetImg("bubbles", "asset-small", "asmr")}</div><span>KOREAN<br />EATING<br />ASMR</span>`;
     } else if (type === "mukbang") {
-      node.className = "widget video-card mukbang";
-      node.innerHTML = `<div class="asset-pair">${assetImg("burger", "asset-small", "food")}${assetImg("bowl", "asset-small", "bowl")}</div><span>MUKBANG<br />LIVE</span>`;
+      node.className = "widget video-card mukbang korean-asmr";
+      node.innerHTML = `<div class="asset-pair">${assetImg("bowl", "asset-small", "bowl")}${assetImg("burger", "asset-small", "food")}</div><span>K-BBQ<br />MUKBANG<br />ASMR</span>`;
     } else if (type === "podcast") {
       node.className = "widget podcast";
-      node.innerHTML = `<h3>True Crime Podcast</h3>${assetImg("microphone", "asset-podcast", "microphone")}<div class="podcast-wave"></div><p>Episode 87: the missing cursor.</p>`;
+      node.innerHTML = `<h3>True Crime Audio</h3>${assetImg("microphone", "asset-podcast", "microphone")}<div class="podcast-wave"></div><p>Episode 87: the missing cursor.</p><button class="podcast-play" type="button">Play audio</button>`;
+      node.querySelector("button").addEventListener("click", () => {
+        primeSound();
+        speak("Episode eighty seven. The cursor vanished at midnight. The only clue was a button still warm from clicking.");
+        playTone(147, 0.3, "sine", 0.025);
+      });
     } else if (type === "meditation") {
       node.className = "widget meditation";
-      node.innerHTML = `<h3>${assetImg("lotus", "asset-title", "meditation")} Meditation</h3><div class="mandala">${assetImg("lotus", "asset-lotus", "meditation")}</div><button class="breathe" type="button">breathe</button>`;
+      node.innerHTML = `<h3>${assetImg("lotus", "asset-title", "meditation")} Rings</h3><div class="activity-rings"><span class="ring-move"></span><span class="ring-exercise"></span><span class="ring-stand"></span><b>9:41</b></div><button class="breathe" type="button">close rings</button>`;
       node.querySelector("button").addEventListener("click", () => {
         addStim(state.flags.meditation2 ? 2400 : 1200);
         spawnTrail(210, 420);
@@ -611,7 +625,7 @@ function rebuildWidgets() {
       });
     } else if (type === "hydraulic") {
       node.className = "widget hydraulic";
-      node.innerHTML = `<div class="press-rod"></div><div class="press-head">${assetImg("gear", "asset-press-gear", "gear")}</div><div class="press-target">${assetImg("package", "asset-press-package", "package")}</div><div class="press-base"></div><button class="squish" type="button">squish</button><small>${state.hydraulicPresses} squishes</small>`;
+      node.innerHTML = `<button class="hydraulic-play" type="button">START MACHINE</button><div class="hydraulic-video"><div class="press-rod"></div><div class="press-head">${assetImg("gear", "asset-press-gear", "gear")}</div><div class="press-target">${assetImg("package", "asset-press-package", "package")}</div><div class="press-base"></div></div><small>${state.hydraulicPresses} runs</small>`;
       node.querySelector("button").addEventListener("click", () => {
         triggerHydraulicSquish();
         render();
@@ -711,6 +725,23 @@ function updateWidgetClasses() {
     const duration = Math.max(0.9, 4 / Math.pow(1.15, state.hydraulicSpeed));
     press.style.animationDuration = `${duration}s`;
   }
+}
+
+function videoThemeClass() {
+  if (state.videoTheme === "sitcom") return "sitcom-video";
+  if (state.videoTheme === "worldcup") return "worldcup-video";
+  return "voxel-video";
+}
+
+function videoReplayHtml() {
+  const badge = `<em class="volume-badge">${state.flags.subwaySound ? "RAIN" : "MUTE"}</em>`;
+  if (state.videoTheme === "sitcom") {
+    return `<div class="sitcom-couch"></div><div class="sitcom-lamps"></div><span>SITCOM<br />RERUN<br />TAPE</span>${badge}`;
+  }
+  if (state.videoTheme === "worldcup") {
+    return `<div class="pitch"></div><div class="ball"></div><span>WORLD<br />CUP<br />REPLAY</span>${badge}`;
+  }
+  return `<div class="voxel-sky"></div><div class="voxel-wall">${Array.from({ length: 24 }, (_, i) => `<i style="--i:${i}"></i>`).join("")}</div><div class="pickaxe">⛏</div><span>VOXEL<br />MINING<br />REPLAY</span>${badge}`;
 }
 
 function spawnClickPop(x, y, amount, crit) {
@@ -984,9 +1015,9 @@ function updateDuoTimer(dt) {
   state.duoTimeLeft = Math.max(0, state.duoTimeLeft - dt);
   const duoNode = el.widgetLayer.querySelector('[data-type="duo"]');
   const timeNode = duoNode?.querySelector(".duo-time");
-  const fillNode = duoNode?.querySelector(".duo-time-fill");
+  const ringNode = duoNode?.querySelector(".duo-ring");
   if (timeNode) timeNode.textContent = `${Math.ceil(state.duoTimeLeft)}s`;
-  if (fillNode) fillNode.style.width = `${Math.max(0, Math.min(100, (state.duoTimeLeft / 30) * 100))}%`;
+  if (ringNode) ringNode.style.setProperty("--duo", `${Math.max(0, Math.min(100, (state.duoTimeLeft / 30) * 100))}%`);
   if (state.duoTimeLeft > 0) return;
   failDuoLesson("Time's up.");
 }
@@ -1049,8 +1080,13 @@ function runTimers(dt) {
     cycleLofiTrack();
   }
   if (state.flags.subwaySound && state.widgets.includes("subway") && Math.random() < dt * 0.7) {
-    playTone(260 + Math.random() * 220, 0.025, "square", 0.012);
+    playMiningTick();
   }
+  if (state.flags.thunder && state.flags.rain && Math.random() < dt * 0.055) {
+    playThunderRoll();
+  }
+  updateRainCanvas(dt);
+  updateRainAudio();
   if (state.flags.pet) {
     const petNode = el.widgetLayer.querySelector('[data-type="pet"]');
     const hungerFill = petNode?.querySelector(".pet-hunger span");
@@ -1077,8 +1113,8 @@ function triggerHydraulicSquish() {
   press?.classList.add("squishing");
   const count = press?.querySelector("small");
   if (count) count.textContent = `${state.hydraulicPresses} squishes`;
-  playTone(80, 0.07, "sawtooth", 0.08);
-  window.setTimeout(() => press?.classList.remove("squishing"), 420);
+  playTone(80, 0.18, "sawtooth", 0.08);
+  window.setTimeout(() => press?.classList.remove("squishing"), 1800);
 }
 
 function renderPassive() {
@@ -1092,6 +1128,9 @@ function updateStocks() {
   STOCKS.forEach((stock) => {
     const swing = (Math.random() - 0.45) * (state.flags.leverage ? 18 : 9);
     stock.price = Math.max(1, stock.price + swing);
+    if (!Array.isArray(stock.history)) stock.history = seedStockHistory(stock.price);
+    stock.history.push(Number(stock.price.toFixed(2)));
+    while (stock.history.length > 24) stock.history.shift();
     if (swing > 0 && stock.shares > 0) {
       const gain = swing * stock.shares * (stock.crypto ? 22 : 8);
       state.stockGain += gain;
@@ -1118,6 +1157,9 @@ function addCryptoStocks() {
   if (doge) doge.crypto = true;
   if (!btc) STOCKS.push({ symbol: "BTC", price: 420, shares: 0, basis: 0, crypto: true });
   if (!doge) STOCKS.push({ symbol: "DOGE", price: 69, shares: 0, basis: 0, crypto: true });
+  STOCKS.forEach((stock) => {
+    if (!Array.isArray(stock.history)) stock.history = seedStockHistory(stock.price);
+  });
 }
 
 function bindStockButtons(root) {
@@ -1163,18 +1205,17 @@ function duoHtml() {
   const question = DUO_QUESTIONS[state.duoIndex];
   if (!question || state.duoFailed) {
     return `
-      <h3>${assetImg("owl", "asset-title", "owl")} Language Lesson</h3>
-      <p>${state.duoFailed ? "The lesson is over." : "All lessons complete."}</p>
+      <h3><span class="duo-mascot">${assetImg("owl", "asset-title", "owl")}</span> Language Lesson</h3>
+      <p class="duo-prompt">${state.duoFailed ? "The lesson is over." : "All lessons complete."}</p>
       <small>${state.duoCorrect} correct</small>
     `;
   }
   return `
-    <h3>${assetImg("owl", "asset-title", "owl")} Language Lesson</h3>
-    <div class="duo-timer">
-      <span class="duo-time">${Math.ceil(state.duoTimeLeft)}s</span>
-      <i class="duo-time-fill" style="width:${Math.max(0, Math.min(100, (state.duoTimeLeft / 30) * 100))}%"></i>
+    <div class="duo-top">
+      <span class="duo-mascot">${assetImg("owl", "asset-title", "owl")}</span>
+      <p class="duo-prompt">${question.prompt}</p>
+      <div class="duo-ring" style="--duo:${Math.max(0, Math.min(100, (state.duoTimeLeft / 30) * 100))}%"><span class="duo-time">${Math.ceil(state.duoTimeLeft)}</span></div>
     </div>
-    <p>${question.prompt}</p>
     <div class="duo-options">
       ${question.options.map((option) => `<button class="duo-answer" data-answer="${option}" type="button">${option}</button>`).join("")}
     </div>
@@ -1188,8 +1229,10 @@ function answerDuo(answer) {
   if (answer === question.answer) {
     state.duoCorrect += 1;
     addStim(1200 + state.duoCorrect * 250 + state.level * 50);
+    playDuoCorrect();
     if (state.duoCorrect >= 10) unlockAchievement("Owl Scholar");
   } else {
+    playDuoWrong();
     failDuoLesson("Wrong answer.");
     return;
   }
@@ -1206,6 +1249,15 @@ function answerDuo(answer) {
   }
   render();
   save();
+}
+
+function playDuoCorrect() {
+  playTone(659, 0.08, "sine", 0.025);
+  window.setTimeout(() => playTone(880, 0.1, "sine", 0.022), 90);
+}
+
+function playDuoWrong() {
+  playTone(155, 0.16, "triangle", 0.04);
 }
 
 function failDuoLesson(message) {
@@ -1248,6 +1300,11 @@ function buyCosmetic(id) {
   if (!item || !canBuyCosmetic(item)) return;
   state.gems -= item.cost;
   state.cosmetics.push(id);
+  if (id === "glassButton") state.buttonSkin = "glass";
+  if (id === "arcadeButton") state.buttonSkin = "arcade";
+  if (id === "friendsTape") state.videoTheme = "sitcom";
+  if (id === "worldCupTape") state.videoTheme = "worldcup";
+  if (id === "alarm") state.flags.alarmOff = true;
   unlockAchievement("Casual Shopper");
   if (id === "cursor") unlockAchievement("Cursor Collector");
   if (id === "fedora") unlockAchievement("M'Lady");
@@ -1255,6 +1312,7 @@ function buyCosmetic(id) {
   openInfo("Item Shop", shopHtml());
   bindShopButtons();
   render();
+  rebuildWidgets();
   save();
 }
 
@@ -1438,19 +1496,53 @@ function bindShopButtons() {
 }
 
 function stocksHtml() {
+  const selected = STOCKS[0];
   return `
     <h3>${assetImg("chart", "asset-title", "chart")} Stock Market</h3>
-    ${STOCKS.map((stock, index) => `
-      <div class="ticker">
-        <span>${stock.symbol}</span>
-        <strong>${stock.price.toFixed(2)}</strong>
-        <small>${stock.shares} owned</small>
-        <button data-stock="${index}" data-action="buy" ${state.stim < stock.price ? "disabled" : ""} type="button">Buy</button>
-        <button data-stock="${index}" data-action="sell" ${stock.shares <= 0 ? "disabled" : ""} type="button">Sell</button>
+    <div class="stock-terminal">
+      <div class="stock-head"><span>${selected.symbol}</span><strong>$${selected.price.toFixed(0)}</strong></div>
+      ${stockChartSvg(selected)}
+      <div class="stock-actions">
+        <span>${selected.shares} shares<br /><em>+$${format(state.regularStockGain + state.cryptoGain)}</em></span>
+        <button data-stock="0" data-action="buy" ${state.stim < selected.price ? "disabled" : ""} type="button">Buy</button>
+        <button data-stock="0" data-action="sell" ${selected.shares <= 0 ? "disabled" : ""} type="button">Sell</button>
       </div>
-    `).join("")}
-    <p>Stock gains: ${format(state.regularStockGain)}</p>
-    <p>Crypto gains: ${format(state.cryptoGain)}</p>
+    </div>
+    <div class="ticker-list">
+      ${STOCKS.map((stock, index) => `
+        <button class="mini-ticker" data-stock="${index}" data-action="buy" ${state.stim < stock.price ? "disabled" : ""} type="button">
+          ${stock.symbol} <strong>$${stock.price.toFixed(0)}</strong> <small>${stock.shares} owned</small>
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
+function stockChartSvg(stock) {
+  const history = Array.isArray(stock.history) && stock.history.length > 1 ? stock.history : seedStockHistory(stock.price);
+  const min = Math.min(...history);
+  const max = Math.max(...history);
+  const range = Math.max(1, max - min);
+  const points = history.map((value, index) => {
+    const x = (index / (history.length - 1)) * 280;
+    const y = 118 - ((value - min) / range) * 104;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+  const last = points.split(" ").at(-1);
+  return `
+    <svg class="stock-chart" viewBox="0 0 280 128" role="img" aria-label="${stock.symbol} chart">
+      <defs>
+        <linearGradient id="stockFill" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#78ff2f" stop-opacity="0.32" />
+          <stop offset="1" stop-color="#78ff2f" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      ${Array.from({ length: 6 }, (_, i) => `<line x1="${i * 56}" y1="0" x2="${i * 56}" y2="128" />`).join("")}
+      ${Array.from({ length: 5 }, (_, i) => `<line x1="0" y1="${i * 32}" x2="280" y2="${i * 32}" />`).join("")}
+      <polyline class="stock-line" points="${points}" />
+      <polygon class="stock-fill" points="0,128 ${points} 280,128" />
+      <circle class="stock-dot" cx="${last.split(",")[0]}" cy="${last.split(",")[1]}" r="4" />
+    </svg>
   `;
 }
 
@@ -1558,6 +1650,7 @@ function restoreStocks(savedStocks, hasCrypto) {
     stock.shares = Number.isFinite(savedStock.shares) ? savedStock.shares : stock.shares;
     stock.basis = Number.isFinite(savedStock.basis) ? savedStock.basis : stock.basis;
     stock.crypto = !!savedStock.crypto;
+    stock.history = Array.isArray(savedStock.history) ? savedStock.history.slice(-24) : seedStockHistory(stock.price);
   });
   return stocks;
 }
@@ -1590,11 +1683,121 @@ function setFavicon(label) {
 }
 
 function primeSound() {
-  if (soundReady) return;
+  if (soundReady) {
+    audioContext?.resume?.();
+    updateRainAudio();
+    return;
+  }
   const Ctx = window.AudioContext || window.webkitAudioContext;
   if (!Ctx) return;
   audioContext = new Ctx();
   soundReady = true;
+  updateRainAudio();
+}
+
+function updateRainAudio() {
+  if (!audioContext || !state.flags.rain) return;
+  if (rainAudio) {
+    rainAudio.volume.gain.setTargetAtTime(state.flags.thunder ? 0.12 : 0.09, audioContext.currentTime, 0.4);
+    return;
+  }
+  const length = audioContext.sampleRate * 3;
+  const buffer = audioContext.createBuffer(1, length, audioContext.sampleRate);
+  const data = buffer.getChannelData(0);
+  let last = 0;
+  for (let i = 0; i < length; i += 1) {
+    last = (last + (Math.random() * 2 - 1) * 0.12) / 1.08;
+    data[i] = last + (Math.random() * 2 - 1) * 0.08;
+  }
+  const source = audioContext.createBufferSource();
+  const lowRain = audioContext.createBiquadFilter();
+  const highMist = audioContext.createBiquadFilter();
+  const volume = audioContext.createGain();
+  source.buffer = buffer;
+  source.loop = true;
+  lowRain.type = "lowpass";
+  lowRain.frequency.value = 950;
+  highMist.type = "highpass";
+  highMist.frequency.value = 1800;
+  volume.gain.value = 0.001;
+  source.connect(lowRain);
+  source.connect(highMist);
+  lowRain.connect(volume);
+  highMist.connect(volume);
+  volume.connect(audioContext.destination);
+  source.start();
+  volume.gain.setTargetAtTime(0.1, audioContext.currentTime, 0.7);
+  rainAudio = { source, volume };
+}
+
+function playMiningTick() {
+  playTone(180 + Math.random() * 80, 0.035, "square", 0.012);
+  window.setTimeout(() => playTone(90, 0.02, "triangle", 0.008), 45);
+}
+
+function playThunderRoll() {
+  if (!state.flags.thunder || !audioContext) return;
+  playTone(42, 1.6, "sawtooth", 0.035);
+  window.setTimeout(() => playTone(58, 1.1, "triangle", 0.025), 320);
+}
+
+function ensureRainCanvas() {
+  if (!el.rainCanvas || rainCanvasReady) return;
+  const rect = gameSize();
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  el.rainCanvas.width = Math.floor(rect.w * dpr);
+  el.rainCanvas.height = Math.floor(rect.h * dpr);
+  el.rainCanvas.style.width = `${rect.w}px`;
+  el.rainCanvas.style.height = `${rect.h}px`;
+  rainDrops = Array.from({ length: 170 }, () => ({
+    x: Math.random() * rect.w,
+    y: Math.random() * rect.h,
+    z: 0.35 + Math.random() * 1.4,
+    len: 12 + Math.random() * 28,
+    speed: 260 + Math.random() * 520,
+  }));
+  rainCanvasReady = true;
+}
+
+function updateRainCanvas(dt) {
+  if (!state.flags.rain || !el.rainCanvas) {
+    rainCanvasReady = false;
+    return;
+  }
+  ensureRainCanvas();
+  const rect = gameSize();
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  if (el.rainCanvas.width !== Math.floor(rect.w * dpr) || el.rainCanvas.height !== Math.floor(rect.h * dpr)) {
+    rainCanvasReady = false;
+    ensureRainCanvas();
+  }
+  const ctx = el.rainCanvas.getContext("2d");
+  ctx.clearRect(0, 0, el.rainCanvas.width, el.rainCanvas.height);
+  ctx.save();
+  ctx.scale(dpr, dpr);
+  ctx.globalCompositeOperation = "source-over";
+  ctx.lineCap = "round";
+  rainDrops.forEach((drop) => {
+    drop.x += 80 * drop.z * dt;
+    drop.y += drop.speed * drop.z * dt;
+    if (drop.y > rect.h + 30 || drop.x > rect.w + 40) {
+      drop.x = Math.random() * rect.w - 80;
+      drop.y = -30;
+    }
+    ctx.strokeStyle = `rgba(125, 175, 220, ${0.18 + drop.z * 0.18})`;
+    ctx.lineWidth = Math.max(1, drop.z * 1.4);
+    ctx.beginPath();
+    ctx.moveTo(drop.x, drop.y);
+    ctx.lineTo(drop.x - drop.len * 0.28, drop.y + drop.len);
+    ctx.stroke();
+    if (drop.y > rect.h - 30 && Math.random() < 0.12) {
+      ctx.strokeStyle = "rgba(170, 210, 245, 0.16)";
+      ctx.beginPath();
+      ctx.ellipse(drop.x, rect.h - 12, 6 * drop.z, 2, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  });
+  ctx.restore();
 }
 
 function playTone(frequency, duration, type = "sine", gain = 0.025) {
